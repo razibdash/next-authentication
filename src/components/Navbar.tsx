@@ -29,7 +29,12 @@ const Navbar = () => {
           
             {/* <SignInButton mode="modal" /> */}
             <SignedIn>
-              <UserButton  />
+             <div className="flex justify-center items-center gap-2">
+                <UserButton  />
+               <Link href={'/user-profile'} className=" text-black  cursor-pointer">
+                  Profile
+                </Link>
+             </div>
             </SignedIn>
            
          
