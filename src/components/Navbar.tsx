@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react"; // icon library (lucide-react)
+import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className="bg-white shadow-md sticky ">
+      <div className="container max-w-7xl  mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-blue-600">
           MyLogo
@@ -24,18 +26,30 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex space-x-4">
-          <Link
-            href="/login"
-            className="px-4 py-2 border rounded-lg text-blue-600 border-blue-600 hover:bg-blue-50 transition"
-          >
-            Login
-          </Link>
-          <Link
-            href="/signup"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            Signup
-          </Link>
+          
+            {/* <SignInButton mode="modal" /> */}
+            <SignedIn>
+              <UserButton  />
+            </SignedIn>
+           
+         
+         
+            <SignedOut>
+               <SignInButton mode="modal">
+                  <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Login
+                </button>
+               </SignInButton>
+               
+              
+              {/* <SignUpButton mode="modal">
+                <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton> */}
+            </SignedOut>
+         
+          
         </div>
 
         {/* Mobile Menu Button */}
