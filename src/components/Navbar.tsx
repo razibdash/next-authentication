@@ -4,10 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react"; // icon library (lucide-react)
 import { SignInButton, UserButton } from "@clerk/nextjs";
-import { SignedIn, SignedOut, SignUpButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignUpButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {user,isSignedIn,isLoaded,}=useUser();
+  const role=user?.publicMetadata?.role;
+  console.log(role)
 
   return (
     <nav className="bg-white shadow-md sticky ">
@@ -22,6 +25,15 @@ const Navbar = () => {
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
+          {
+            isSignedIn ? (isSignedIn?(
+                <>
+                {role==='user' && (<Link href='/user-dashboard/'>User Dashboard </Link>)}
+                {role==='admin' && (<Link href='/admin-dashboard/'>Admin Dashboard </Link>)}
+                {role==='manager' && (<Link href='/manager-dashboard/'>Manager Dashboard </Link>)}
+                </>
+            ):<p>Hello</p>):<p>login</p>
+          }
         </div>
 
         {/* Desktop Buttons */}
