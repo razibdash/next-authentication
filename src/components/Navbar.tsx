@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {user,isSignedIn,isLoaded,}=useUser();
   const role=user?.publicMetadata?.role;
-  console.log(role)
+  // console.log(role)
 
   return (
     <nav className="bg-white shadow-md sticky ">
